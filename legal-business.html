@@ -50,6 +50,89 @@
             }
         }
 
+        @keyframes float-btn {
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-8px) scale(1.03);
+            }
+        }
+
+        @keyframes ring-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(118, 1, 9, 0.5), 0 20px 50px rgba(0, 0, 0, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 14px rgba(118, 1, 9, 0), 0 20px 50px rgba(0, 0, 0, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(118, 1, 9, 0), 0 20px 50px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        @keyframes wa-ring-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5), 0 8px 24px rgba(0, 0, 0, 0.3);
+            }
+
+            70% {
+                box-shadow: 0 0 0 12px rgba(37, 211, 102, 0), 0 8px 24px rgba(0, 0, 0, 0.3);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 8px 24px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        .animate-float-btn {
+            animation: float-btn 4s ease-in-out infinite, ring-pulse 2.5s ease-out infinite;
+        }
+
+        .animate-wa-pulse {
+            animation: wa-ring-pulse 2s ease-out infinite;
+        }
+
+        .speed-dial-item {
+            opacity: 0;
+            transform: translateY(20px) scale(0.8);
+            transition: opacity 0.3s ease, transform 0.3s ease, pointer-events 0s;
+            pointer-events: none;
+        }
+
+        .speed-dial-item.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .speed-dial-item:nth-child(1).open {
+            transition-delay: 0.08s;
+        }
+
+        .speed-dial-item:nth-child(2).open {
+            transition-delay: 0.16s;
+        }
+
+        .speed-dial-toggle span {
+            transition: transform 0.35s ease, opacity 0.2s ease;
+        }
+
+        .speed-dial-toggle.open .icon-main {
+            transform: rotate(45deg);
+            opacity: 0;
+            position: absolute;
+        }
+
+        .speed-dial-toggle.open .icon-close {
+            opacity: 1;
+        }
+
         @keyframes pulse-glow {
 
             0%,
@@ -291,7 +374,7 @@
                     <a href="#servicios"
                         class="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors">Servicios</a>
                 </div>
-                <button id="nav-cta"
+                <button id="nav-cta" onclick="scheduleCall(getCurrentProfile())"
                     class="bg-maroon hover:bg-maroon-light text-white font-bold px-8 py-3 rounded-full text-xs uppercase tracking-widest transition-all gold-border hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                     Consulta Estratégica </button>
             </div>
@@ -320,7 +403,7 @@
                     Protegemos la integridad de su organización y validamos la justicia de sus derechos con rigor
                     institucional.</p><!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-5">
-                    <button onclick="selectProfile('empresa')"
+                    <button onclick="scheduleCall('empresa')"
                         class="group relative px-8 py-5 bg-maroon text-white font-bold rounded-2xl overflow-hidden transition-all hover:scale-[1.02] flex-1 text-center">
                         <div
                             class="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500">
@@ -334,7 +417,7 @@
                             </svg>
                         </span>
                     </button>
-                    <button onclick="selectProfile('trabajador')"
+                    <button onclick="scheduleCall('trabajador')"
                         class="group relative px-8 py-5 glass-card-dark text-white font-bold rounded-2xl border border-white/10 hover:bg-white/10 transition-all hover:scale-[1.02] flex-1 text-center">
                         <span
                             class="relative flex items-center justify-center gap-3 text-[10px] tracking-widest uppercase">
@@ -454,7 +537,7 @@
             <div class="grid lg:grid-cols-2 gap-10">
                 <!-- Card: Empresas -->
                 <div class="group relative glass-card-dark rounded-[2.5rem] p-10 lg:p-12 hover:bg-white/5 transition-all duration-500 cursor-pointer overflow-hidden gold-border reveal-on-scroll"
-                    onclick="selectProfile('empresa')">
+                    onclick="scheduleCall('empresa')">
                     <div class="relative z-10">
                         <div
                             class="w-16 h-16 gradient-wine rounded-2xl flex items-center justify-center mb-8 shadow-xl gold-border">
@@ -488,7 +571,7 @@
                     </div>
                 </div><!-- Card: Trabajadores -->
                 <div class="group relative glass-card-dark rounded-[2.5rem] p-10 lg:p-12 hover:bg-white/5 transition-all duration-500 cursor-pointer overflow-hidden gold-border reveal-on-scroll"
-                    onclick="selectProfile('trabajador')" style="transition-delay: 200ms;">
+                    onclick="scheduleCall('trabajador')" style="transition-delay: 200ms;">
                     <div class="relative z-10">
                         <div class="w-16 h-16 bg-gold rounded-2xl flex items-center justify-center mb-8 shadow-xl">
                             <svg class="w-8 h-8 text-navy-deep" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -720,16 +803,55 @@
         <p class="text-gray-500 text-[10px] font-bold uppercase tracking-[.4em] mt-10">Confidencialidad Nivel
             Corporativo · Disponibilidad 24/7</p>
     </div>
-</section><!-- Floating CTA Button -->
+</section><!-- Floating Speed-Dial -->
 <div id="floating-cta"
-    class="fixed bottom-10 right-10 z-50 opacity-0 translate-y-10 transition-all duration-700 pointer-events-none">
-    <button onclick="scheduleCall(getCurrentProfile())"
-        class="bg-maroon hover:bg-gold text-white hover:text-navy-deep font-bold px-8 py-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex items-center gap-4 transition-all gold-border">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-        </svg>
-        <span class="text-xs uppercase tracking-widest">Agendar Pro</span>
+    class="fixed bottom-8 right-8 z-50 flex flex-col items-end gap-3 opacity-0 translate-y-10 transition-all duration-700 pointer-events-none">
+
+    <!-- Speed-dial items (appear above main button) -->
+    <div class="flex flex-col items-end gap-3">
+
+        <!-- WhatsApp -->
+        <div class="speed-dial-item flex items-center gap-3" id="sd-wa">
+            <span
+                class="bg-navy-deep/90 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-white/10 whitespace-nowrap backdrop-blur-sm">WhatsApp</span>
+            <a href="https://wa.me/51999999999?text=Hola%2C%20quiero%20una%20consulta%20legal" target="_blank"
+                rel="noopener"
+                class="w-14 h-14 rounded-2xl flex items-center justify-center text-white transition-all hover:scale-110 animate-wa-pulse"
+                style="background:#25D366;">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+            </a>
+        </div>
+
+        <!-- Agenda -->
+        <div class="speed-dial-item flex items-center gap-3" id="sd-agenda">
+            <span
+                class="bg-navy-deep/90 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-white/10 whitespace-nowrap backdrop-blur-sm">Agendar</span>
+            <button onclick="scheduleCall(getCurrentProfile())"
+                class="w-14 h-14 bg-maroon rounded-2xl flex items-center justify-center text-white transition-all hover:scale-110 hover:bg-maroon-light gold-border">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main toggle button -->
+    <button id="sd-toggle" onclick="toggleSpeedDial()"
+        class="speed-dial-toggle w-16 h-16 bg-maroon rounded-2xl flex items-center justify-center text-white relative overflow-hidden gold-border animate-float-btn transition-colors hover:bg-maroon-light">
+        <span class="icon-main absolute inset-0 flex items-center justify-center">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14M5 12h14" />
+            </svg>
+        </span>
+        <span class="icon-close absolute inset-0 flex items-center justify-center opacity-0">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </span>
     </button>
 </div><!-- Footer -->
 <footer class="bg-navy-deep py-20 border-t border-white/5">
@@ -1441,6 +1563,26 @@
         document.getElementById('scanner').scrollIntoView({ behavior: 'smooth' });
     }
 
+    // Speed-dial toggle
+    let speedDialOpen = false;
+    function toggleSpeedDial() {
+        speedDialOpen = !speedDialOpen;
+        const toggle = document.getElementById('sd-toggle');
+        const items = document.querySelectorAll('.speed-dial-item');
+        toggle.classList.toggle('open', speedDialOpen);
+        items.forEach(el => el.classList.toggle('open', speedDialOpen));
+        // Pause float animation while open
+        toggle.style.animationPlayState = speedDialOpen ? 'paused' : 'running';
+    }
+
+    // Close speed-dial when clicking outside
+    document.addEventListener('click', function (e) {
+        const dial = document.getElementById('floating-cta');
+        if (speedDialOpen && dial && !dial.contains(e.target)) {
+            toggleSpeedDial();
+        }
+    });
+
     // Reveal on scroll observer
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1459,12 +1601,14 @@
         const floatingCta = document.getElementById('floating-cta');
         const scrollY = window.scrollY;
 
-        if (scrollY > 600) {
-            floatingCta.classList.remove('opacity-0', 'translate-y-10');
+        if (scrollY > 400) {
+            floatingCta.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
             floatingCta.classList.add('opacity-100', 'translate-y-0');
         } else {
-            floatingCta.classList.add('opacity-0', 'translate-y-10');
+            floatingCta.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
             floatingCta.classList.remove('opacity-100', 'translate-y-0');
+            // Close speed dial when hidden
+            if (speedDialOpen) toggleSpeedDial();
         }
     });
 
