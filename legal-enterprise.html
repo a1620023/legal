@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="es" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labor-Guardian &amp; Sentinel</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-emerald {
+            background: linear-gradient(135deg, #50C878 0%, #3BA55D 100%);
+        }
+
+        .gradient-gold {
+            background: linear-gradient(135deg, #C5A059 0%, #D4AF37 100%);
+        }
+
+        .text-gradient-emerald {
+            background: linear-gradient(135deg, #50C878 0%, #7DFFB3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #C5A059 0%, #F4D03F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .risk-score-ring {
+            background: conic-gradient(#50C878 0deg 331deg, rgba(255, 255, 255, 0.1) 331deg 360deg);
+        }
+
+        .pulse-animation {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(80, 200, 120, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(80, 200, 120, 0.6);
+            }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .slide-up {
+            animation: slideUp 0.6s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .panic-btn {
+            animation: panic-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes panic-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(239, 68, 68, 0);
+            }
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .nav-item.active {
+            color: #50C878;
+        }
+
+        .nav-item.active svg {
+            stroke: #50C878;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #50C878, #3BA55D);
+            animation: progress-fill 2s ease-out forwards;
+        }
+
+        @keyframes progress-fill {
+            from {
+                width: 0;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(80, 200, 120, 0.3);
+            border-radius: 3px;
+        }
+    </style>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="h-full bg-[#0a0a0a] text-white overflow-auto">
+    <div id="app-wrapper" class="w-full min-h-full relative"><!-- Ambient Background -->
+        <div class="fixed inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 left-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl"></div>
+        </div><!-- Main Content -->
+        <div class="relative z-10 pb-24"><!-- Header -->
+            <header class="sticky top-0 z-50 glass-card border-x-0 border-t-0">
+                <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 gradient-emerald rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-lg font-bold tracking-tight">Labor-Guardian</h1>
+                            <p class="text-xs text-gray-500">&amp; Sentinel</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 glass-card-light rounded-full">
+                            <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div><span
+                                class="text-xs text-gray-400">IA Activa</span>
+                        </div><button
+                            class="w-10 h-10 glass-card-light rounded-xl flex items-center justify-center hover:bg-white/10 transition-all">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg></button>
+                    </div>
+                </div>
+            </header><!-- Hero Section with Profile Selector -->
+            <section class="px-4 py-8 max-w-7xl mx-auto">
+                <div class="text-center mb-10 slide-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 glass-card-light rounded-full mb-6"><span
+                            class="text-xs text-emerald-400 font-medium">🇵🇪 #1 Legal-as-a-Service en Perú</span>
+                    </div>
+                    <h2 id="hero-title" class="text-3xl sm:text-5xl font-bold mb-4 leading-tight">El Futuro del<br><span
+                            class="text-gradient-emerald">Derecho Laboral</span></h2>
+                    <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">Transforma la vulnerabilidad legal en
+                        soberanía jurídica total con IA entrenada en jurisprudencia peruana.</p>
+                </div><!-- Profile Selector Cards -->
+                <div class="grid md:grid-cols-2 gap-4 sm:gap-6 slide-up" style="animation-delay: 0.2s">
+                    <!-- Worker Card --> <button id="worker-btn" onclick="selectProfile('worker')"
+                        class="group glass-card rounded-3xl p-6 sm:p-8 text-left hover:border-emerald-500/50 transition-all duration-300 relative overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all">
+                        </div>
+                        <div class="relative">
+                            <div
+                                class="w-14 h-14 gradient-emerald rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-2">Soy Trabajador</h3>
+                            <p class="text-gray-400 text-sm mb-5">Tu seguro de vida laboral. Redacta documentos legales
+                                en segundos y monitorea tu liquidación en tiempo real.</p>
+                            <div id="worker-cta"
+                                class="inline-flex items-center gap-2 gradient-emerald text-white px-5 py-2.5 rounded-full font-semibold text-sm group-hover:gap-4 transition-all">
+                                <span>Activa tu Escudo</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </div>
+                        </div>
+                    </button> <!-- Business Card --> <button id="business-btn" onclick="selectProfile('business')"
+                        class="group glass-card rounded-3xl p-6 sm:p-8 text-left hover:border-amber-500/50 transition-all duration-300 relative overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all">
+                        </div>
+                        <div class="relative">
+                            <div
+                                class="w-14 h-14 gradient-gold rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-2">Soy Empresa</h3>
+                            <p class="text-gray-400 text-sm mb-5">Tu Departamento Legal Externo Automatizado. Auditoría
+                                continua y blindaje ante SUNAFIL con IA.</p>
+                            <div id="business-cta"
+                                class="inline-flex items-center gap-2 gradient-gold text-white px-5 py-2.5 rounded-full font-semibold text-sm group-hover:gap-4 transition-all">
+                                <span>Blindaje Sentinel</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </section><!-- The Pulse Dashboard (Business View) -->
+            <section id="dashboard-section" class="px-4 py-8 max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold">The Pulse Dashboard</h3>
+                        <p class="text-gray-500 text-sm">Vista Empresa · Risk Score en tiempo real</p>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1.5 glass-card-light rounded-full">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full"></div><span
+                            class="text-xs text-gray-400">Última sync: Ahora</span>
+                    </div>
+                </div>
+                <div class="grid lg:grid-cols-3 gap-4"><!-- Risk Score Card -->
+                    <div class="glass-card rounded-3xl p-6 lg:col-span-1">
+                        <div class="flex items-center justify-between mb-4"><span class="text-sm text-gray-400">Labor
+                                Risk Score</span> <span
+                                class="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-400 rounded-full">Óptimo</span>
+                        </div>
+                        <div class="flex items-center justify-center py-4">
+                            <div class="relative">
+                                <div class="w-36 h-36 risk-score-ring rounded-full p-3 pulse-animation">
+                                    <div
+                                        class="w-full h-full bg-[#121212] rounded-full flex items-center justify-center flex-col">
+                                        <span class="text-4xl font-bold text-gradient-emerald">92</span> <span
+                                            class="text-xs text-gray-500">/100</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-3 mt-4">
+                            <div class="flex items-center justify-between text-sm"><span
+                                    class="text-gray-400">Cumplimiento Planillas</span> <span
+                                    class="text-emerald-400 font-medium">98%</span>
+                            </div>
+                            <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="progress-bar h-full rounded-full" style="width: 98%"></div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm"><span class="text-gray-400">Contratos
+                                    Vigentes</span> <span class="text-emerald-400 font-medium">87%</span>
+                            </div>
+                            <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="progress-bar h-full rounded-full" style="width: 87%"></div>
+                            </div>
+                        </div>
+                    </div><!-- Alerts & Compliance -->
+                    <div class="glass-card rounded-3xl p-6 lg:col-span-2">
+                        <div class="flex items-center justify-between mb-5"><span class="text-sm text-gray-400">Alertas
+                                de Cumplimiento</span> <button class="text-xs text-emerald-400 hover:underline">Ver
+                                todas →</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div
+                                class="flex items-start gap-4 p-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl">
+                                <div
+                                    class="w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1"><span
+                                            class="font-semibold text-sm">3 contratos por vencer</span> <span
+                                            class="text-xs text-amber-400">Vence en 7 días</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Contratos de Juan Pérez, María García y Carlos
+                                        López requieren renovación antes del 15 de Febrero.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-start gap-4 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl">
+                                <div
+                                    class="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1"><span
+                                            class="font-semibold text-sm">PDT 601 - Planilla sincronizada</span> <span
+                                            class="text-xs text-emerald-400">Completado</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400">La declaración de Enero 2025 fue verificada y está
+                                        lista para presentación ante SUNAT.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 glass-card-light rounded-2xl">
+                                <div
+                                    class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1"><span
+                                            class="font-semibold text-sm">Capacitación SST programada</span> <span
+                                            class="text-xs text-gray-500">28 Feb 2025</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Recordatorio: Capacitación obligatoria en Seguridad
+                                        y Salud en el Trabajo para 45 colaboradores.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- IA Lab Section -->
+            <section class="px-4 py-8 max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold">IA Lab</h3>
+                        <p class="text-gray-500 text-sm">Genera documentos legales al instante</p>
+                    </div>
+                </div>
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="p-4 border-b border-white/5 flex items-center gap-3">
+                        <div class="w-8 h-8 gradient-emerald rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div><span class="font-medium text-sm">Asistente Legal IA</span> <span
+                                class="ml-2 text-xs px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full">GPT-4
+                                Legal</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4 max-h-80 overflow-y-auto"><!-- Chat Messages -->
+                        <div class="flex gap-3">
+                            <div
+                                class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-xs">👤</span>
+                            </div>
+                            <div class="glass-card-light rounded-2xl rounded-tl-none p-4 max-w-xs sm:max-w-md">
+                                <p class="text-sm">Necesito generar un convenio de extinción de contrato por mutuo
+                                    disenso.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 justify-end">
+                            <div class="gradient-emerald rounded-2xl rounded-tr-none p-4 max-w-xs sm:max-w-md">
+                                <p class="text-sm mb-3">He generado tu documento. Incluye:</p>
+                                <ul class="text-xs space-y-1 opacity-90">
+                                    <li>✓ Cláusulas de mutuo disenso según D.L. 728</li>
+                                    <li>✓ Liquidación de beneficios sociales</li>
+                                    <li>✓ Constancia de no adeudo</li>
+                                    <li>✓ Formato MTPE actualizado 2025</li>
+                                </ul>
+                            </div>
+                            <div
+                                class="w-8 h-8 gradient-emerald rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div><!-- Document Preview -->
+                        <div class="glass-card-light rounded-2xl p-4 mx-auto max-w-sm">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 bg-red-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-red-400" fill="currentColor" viewbox="0 0 24 24">
+                                        <path
+                                            d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 2l5 5h-5V4zm-3 9h4v1h-4v-1zm0 2h4v1h-4v-1zm-2-2h1v1H8v-1zm0 2h1v1H8v-1z" />
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-medium text-sm truncate">Convenio_Extincion_2025.pdf</p>
+                                    <p class="text-xs text-gray-500">245 KB · Listo para descargar</p>
+                                </div>
+                            </div><button
+                                class="w-full gradient-emerald text-white py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg> Descargar Documento </button>
+                        </div>
+                    </div><!-- Input Area -->
+                    <div class="p-4 border-t border-white/5">
+                        <div class="flex gap-3"><input type="text" placeholder="Describe qué documento necesitas..."
+                                class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500/50 transition-colors">
+                            <button
+                                class="gradient-emerald w-12 h-12 rounded-xl flex items-center justify-center hover:opacity-90 transition-opacity">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg></button>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- Bento Grid News -->
+            <section class="px-4 py-8 max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold">Labor News</h3>
+                        <p class="text-gray-500 text-sm">Análisis legal con IA en tiempo real</p>
+                    </div><button class="text-xs text-emerald-400 hover:underline">Ver más →</button>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div
+                        class="glass-card rounded-2xl p-5 hover:border-emerald-500/30 transition-all cursor-pointer group">
+                        <div class="flex items-center gap-2 mb-3"><span
+                                class="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-400 rounded-full">🤖 Analizado
+                                por IA</span> <span class="text-xs text-gray-500">Hace 2h</span>
+                        </div>
+                        <h4 class="font-semibold mb-2 group-hover:text-emerald-400 transition-colors">Nueva Ley de
+                            Teletrabajo: Lo que debes saber</h4>
+                        <p class="text-xs text-gray-400 line-clamp-2">Cambios importantes en la regulación del trabajo
+                            remoto que afectan a empresas con más de 20 trabajadores...</p>
+                    </div>
+                    <div
+                        class="glass-card rounded-2xl p-5 hover:border-amber-500/30 transition-all cursor-pointer group">
+                        <div class="flex items-center gap-2 mb-3"><span
+                                class="text-xs px-2 py-1 bg-amber-500/20 text-amber-400 rounded-full">⚠️ Alerta</span>
+                            <span class="text-xs text-gray-500">Hace 5h</span>
+                        </div>
+                        <h4 class="font-semibold mb-2 group-hover:text-amber-400 transition-colors">SUNAFIL incrementa
+                            fiscalizaciones en Lima</h4>
+                        <p class="text-xs text-gray-400 line-clamp-2">Se reporta un aumento del 40% en inspecciones
+                            laborales durante el primer trimestre de 2025...</p>
+                    </div>
+                    <div
+                        class="glass-card rounded-2xl p-5 hover:border-cyan-500/30 transition-all cursor-pointer group sm:col-span-2 lg:col-span-1">
+                        <div class="flex items-center gap-2 mb-3"><span
+                                class="text-xs px-2 py-1 bg-cyan-500/20 text-cyan-400 rounded-full">📊
+                                Estadística</span> <span class="text-xs text-gray-500">Hace 1d</span>
+                        </div>
+                        <h4 class="font-semibold mb-2 group-hover:text-cyan-400 transition-colors">RMV 2025: Proyección
+                            de incremento</h4>
+                        <p class="text-xs text-gray-400 line-clamp-2">Análisis predictivo sobre posible ajuste de la
+                            Remuneración Mínima Vital antes de julio...</p>
+                    </div>
+                </div>
+            </section><!-- Pricing Section -->
+            <section class="px-4 py-8 max-w-7xl mx-auto">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold mb-2">Planes de Suscripción</h3>
+                    <p class="text-gray-500 text-sm">Elige el plan perfecto para tu protección legal</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-4"><!-- Plan Guardian -->
+                    <div class="glass-card rounded-3xl p-6 hover:border-emerald-500/30 transition-all">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div><span class="text-sm font-medium text-gray-400">Personal</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-1">Plan Guardian</h4>
+                        <div class="flex items-baseline gap-1 mb-4"><span
+                                class="text-3xl font-bold text-gradient-emerald">S/29.90</span> <span
+                                class="text-gray-500 text-sm">/mes</span>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Generador de documentos IA
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Calculadora de liquidación
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Chat legal ilimitado
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Alertas laborales personalizadas
+                            </li>
+                        </ul><button
+                            class="w-full py-3 rounded-xl border border-emerald-500/50 text-emerald-400 font-medium text-sm hover:bg-emerald-500/10 transition-colors">
+                            Comenzar Ahora </button>
+                    </div><!-- Plan Business -->
+                    <div class="glass-card rounded-3xl p-6 border-amber-500/30 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 px-3 py-1 gradient-gold text-xs font-bold rounded-bl-xl">
+                            POPULAR
+                        </div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                            </div><span class="text-sm font-medium text-gray-400">MYPE</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-1">Plan Business</h4>
+                        <div class="flex items-baseline gap-1 mb-4"><span
+                                class="text-3xl font-bold text-gradient-gold">S/199</span> <span
+                                class="text-gray-500 text-sm">/mes</span>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Todo del Plan Guardian
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Auditoría IA mensual
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Dashboard The Pulse
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Hasta 50 colaboradores
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Soporte prioritario
+                            </li>
+                        </ul><button
+                            class="w-full py-3 rounded-xl gradient-gold text-white font-medium text-sm hover:opacity-90 transition-opacity">
+                            Solicitar Demo </button>
+                    </div><!-- Plan Enterprise -->
+                    <div class="glass-card rounded-3xl p-6 hover:border-cyan-500/30 transition-all">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div><span class="text-sm font-medium text-gray-400">Enterprise</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-1">Plan Enterprise</h4>
+                        <div class="flex items-baseline gap-1 mb-4"><span
+                                class="text-2xl font-bold text-cyan-400">Personalizado</span>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Blindaje 360° completo
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Defensa judicial incluida
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Abogado senior dedicado
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> Colaboradores ilimitados
+                            </li>
+                            <li class="flex items-center gap-2 text-sm text-gray-400">
+                                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg> API &amp; integraciones
+                            </li>
+                        </ul><button
+                            class="w-full py-3 rounded-xl border border-cyan-500/50 text-cyan-400 font-medium text-sm hover:bg-cyan-500/10 transition-colors">
+                            Contactar Ventas </button>
+                    </div>
+                </div>
+            </section>
+        </div><!-- Panic Button (Floating) --> <button onclick="activatePanicMode()"
+            class="fixed bottom-24 right-4 z-40 panic-btn bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg><span class="text-sm font-bold hidden sm:inline">Modo Inspección</span> </button>
+        <!-- Bottom Navigation -->
+        <nav class="fixed bottom-0 left-0 right-0 z-50 glass-card border-x-0 border-b-0">
+            <div class="max-w-lg mx-auto px-6 py-3 flex items-center justify-around"><button onclick="switchTab('home')"
+                    class="nav-item active flex flex-col items-center gap-1 p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg><span class="text-xs">Inicio</span> </button> <button onclick="switchTab('docs')"
+                    class="nav-item flex flex-col items-center gap-1 p-2 text-gray-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg><span class="text-xs">Docs</span> </button> <button onclick="switchTab('ai')"
+                    class="nav-item flex flex-col items-center gap-1 p-2 text-gray-500">
+                    <div
+                        class="w-12 h-12 -mt-6 gradient-emerald rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/30">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div><span class="text-xs mt-1">IA Lab</span>
+                </button> <button onclick="switchTab('alerts')"
+                    class="nav-item flex flex-col items-center gap-1 p-2 text-gray-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg><span class="text-xs">Alertas</span> </button> <button onclick="switchTab('profile')"
+                    class="nav-item flex flex-col items-center gap-1 p-2 text-gray-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg><span class="text-xs">Perfil</span> </button>
+            </div>
+        </nav><!-- Panic Mode Modal -->
+        <div id="panic-modal" class="fixed inset-0 z-[100] hidden">
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closePanicModal()"></div>
+            <div
+                class="absolute inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-lg glass-card rounded-3xl p-6 overflow-auto max-h-[90%]">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-red-500/20 rounded-2xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-red-400">Modo Inspección SUNAFIL</h3>
+                            <p class="text-xs text-gray-500">Exportación rápida de expediente legal</p>
+                        </div>
+                    </div><button onclick="closePanicModal()"
+                        class="w-10 h-10 glass-card-light rounded-xl flex items-center justify-center hover:bg-white/10 transition-colors">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg></button>
+                </div>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center gap-3 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                        <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg><span class="text-sm">Contratos de trabajo (47 documentos)</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                        <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg><span class="text-sm">Planillas electrónicas (últimos 12 meses)</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                        <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg><span class="text-sm">Reglamento interno de trabajo</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                        <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg><span class="text-sm">Actas de comité SST</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+                        <svg class="w-5 h-5 text-amber-400 flex-shrink-0 animate-spin" fill="none" stroke="currentColor"
+                            viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg><span class="text-sm">Generando expediente completo...</span>
+                    </div>
+                </div><button
+                    class="w-full py-4 bg-red-600 hover:bg-red-700 text-white rounded-2xl font-bold flex items-center justify-center gap-2 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg> Exportar Expediente Legal Completo </button>
+                <p class="text-center text-xs text-gray-500 mt-4">Tiempo estimado: 30 segundos · Formato: ZIP con PDFs
+                    firmados</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const defaultConfig = {
+            hero_title: 'El Futuro del Derecho Laboral',
+            worker_cta: 'Activa tu Escudo',
+            business_cta: 'Blindaje Sentinel',
+            primary_color: '#50C878',
+            secondary_color: '#C5A059',
+            background_color: '#0a0a0a',
+            text_color: '#ffffff',
+            surface_color: '#121212'
+        };
+
+        let config = { ...defaultConfig };
+
+        async function onConfigChange(cfg) {
+            const heroTitle = document.getElementById('hero-title');
+            if (heroTitle && cfg.hero_title) {
+                const parts = cfg.hero_title.split(' ');
+                const lastWord = parts.pop();
+                heroTitle.innerHTML = parts.join(' ') + '<br><span class="text-gradient-emerald">' + lastWord + '</span>';
+            }
+
+            const workerCta = document.getElementById('worker-cta');
+            if (workerCta) {
+                workerCta.innerHTML = '<span>' + (cfg.worker_cta || defaultConfig.worker_cta) + '</span><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>';
+            }
+
+            const businessCta = document.getElementById('business-cta');
+            if (businessCta) {
+                businessCta.innerHTML = '<span>' + (cfg.business_cta || defaultConfig.business_cta) + '</span><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>';
+            }
+        }
+
+        function mapToCapabilities(cfg) {
+            return {
+                recolorables: [
+                    {
+                        get: () => cfg.background_color || defaultConfig.background_color,
+                        set: (value) => { cfg.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+                    },
+                    {
+                        get: () => cfg.surface_color || defaultConfig.surface_color,
+                        set: (value) => { cfg.surface_color = value; window.elementSdk.setConfig({ surface_color: value }); }
+                    },
+                    {
+                        get: () => cfg.text_color || defaultConfig.text_color,
+                        set: (value) => { cfg.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+                    },
+                    {
+                        get: () => cfg.primary_color || defaultConfig.primary_color,
+                        set: (value) => { cfg.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+                    },
+                    {
+                        get: () => cfg.secondary_color || defaultConfig.secondary_color,
+                        set: (value) => { cfg.secondary_color = value; window.elementSdk.setConfig({ secondary_color: value }); }
+                    }
+                ],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(cfg) {
+            return new Map([
+                ['hero_title', cfg.hero_title || defaultConfig.hero_title],
+                ['worker_cta', cfg.worker_cta || defaultConfig.worker_cta],
+                ['business_cta', cfg.business_cta || defaultConfig.business_cta]
+            ]);
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+
+        function selectProfile(type) {
+            const workerBtn = document.getElementById('worker-btn');
+            const businessBtn = document.getElementById('business-btn');
+            const dashboard = document.getElementById('dashboard-section');
+
+            if (type === 'worker') {
+                workerBtn.classList.add('border-emerald-500/50');
+                businessBtn.classList.remove('border-amber-500/50');
+            } else {
+                businessBtn.classList.add('border-amber-500/50');
+                workerBtn.classList.remove('border-emerald-500/50');
+            }
+
+            if (dashboard) {
+                dashboard.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function switchTab(tab) {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                item.classList.add('text-gray-500');
+            });
+
+            event.currentTarget.classList.add('active');
+            event.currentTarget.classList.remove('text-gray-500');
+        }
+
+        function activatePanicMode() {
+            const modal = document.getElementById('panic-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePanicModal() {
+            const modal = document.getElementById('panic-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePanicModal();
+            }
+        });
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9d3d0ceac1326e04',t:'MTc3MjA4MzgyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>
