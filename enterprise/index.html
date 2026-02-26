@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboralista Perú | Consultoría Laboral Estratégica para Empresas</title>
+    <meta name="description"
+        content="Especialistas en Derecho Laboral Peruano. Brindamos soporte legal integral en contratación, remuneraciones, seguridad y salud en el trabajo ante SUNAFIL.">
+    <meta name="keywords"
+        content="laboralista peru, abogado laboral para empresas, consultoría laboral estratégica, sunafil asesoría, derecho laboral empresarial">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Space Grotesk', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-wine {
+            background: linear-gradient(135deg, #760109 0%, #b91c1c 100%);
+        }
+
+        .text-gradient-wine {
+            background: linear-gradient(135deg, #760109 0%, #b91c1c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-mesh {
+            background: radial-gradient(circle at 50% 50%, #062c41 0%, #020d14 100%);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="h-full bg-[#020d14] text-white overflow-x-hidden">
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/5 backdrop-blur-md bg-black/20">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 gradient-wine rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <span class="font-bold text-lg tracking-tight">Laboralista Perú</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+                <a href="index.html" class="hover:text-white transition">Inicio</a>
+                <a href="nosotros.html" class="hover:text-white transition">Nosotros</a>
+                <a href="servicios.html" class="hover:text-white transition">Servicios</a>
+                <a href="accidentes.html" class="hover:text-white transition">Accidentes</a>
+            </div>
+            <a href="../legal-enterprise.html"
+                class="px-5 py-2 gradient-wine text-white text-xs font-bold rounded-full hover:opacity-90 transition">Ingresar
+                App</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative min-h-[90vh] flex items-center pt-20 overflow-hidden hero-mesh">
+        <div class="absolute inset-0 opacity-20">
+            <img src="assets/legal_shield_building_1772115194887.png" alt="Defense Hub"
+                class="w-full h-full object-cover">
+        </div>
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div>
+                <span
+                    class="inline-block px-4 py-1.5 rounded-full bg-[#760109]/10 border border-[#760109]/30 text-[#760109] text-[10px] font-bold uppercase tracking-widest mb-6">Expertos
+                    en Derecho Laboral</span>
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-8">
+                    Blindaje Legal <br>
+                    <span class="text-gradient-wine">Estratégico</span>
+                </h1>
+                <p class="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed">
+                    Protegemos la continuidad de su empresa y los derechos de su equipo con inteligencia jurídica y
+                    tecnología de vanguardia. Asesoría preventiva ante SUNAFIL y resolución de conflictos.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contacto"
+                        class="px-8 py-4 gradient-wine text-white rounded-2xl font-bold shadow-lg shadow-wine-900/40 hover:scale-[1.02] transition">Agendar
+                        Consulta</a>
+                    <a href="servicios.html"
+                        class="px-8 py-4 glass-card text-white rounded-2xl font-bold hover:bg-white/5 transition">Ver
+                        Servicios</a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="relative z-10 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                    <img src="assets/legal_expert_portrait_1772115173172.png" alt="Abogada Laboralista"
+                        class="w-full grayscale hover:grayscale-0 transition duration-700">
+                </div>
+                <div class="absolute -bottom-10 -right-10 w-64 p-6 glass-card rounded-3xl z-20">
+                    <p class="text-[10px] uppercase font-bold text-[#760109] mb-2 tracking-widest">Compromiso Total</p>
+                    <p class="text-sm italic text-gray-300">"Nuestra misión es transformar la complejidad legal en una
+                        ventaja competitiva para su negocio."</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- STRATEGIC VALUE -->
+    <section class="py-24 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto px-6 text-center mb-16 reveal-on-scroll">
+            <h2 class="text-3xl font-bold mb-4">Consultoría Laboral Estratégica</h2>
+            <div class="h-1 w-20 bg-[#760109] mx-auto mb-8 rounded-full"></div>
+            <p class="text-gray-400 max-w-2xl mx-auto">Asesoramos a empresas peruanas e internacionales en la gestión y
+                prevención de riesgos laborales con más de 12 años de experiencia.</p>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+            <div class="p-10 glass-card rounded-3xl reveal-on-scroll">
+                <div class="w-12 h-12 gradient-wine rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Prevención ante SUNAFIL</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Auditorías preventivas de planilleros, contratos y SST
+                    para asegurar el cumplimiento total antes de cualquier inspección fiscal.</p>
+            </div>
+            <div class="p-10 glass-card rounded-3xl reveal-on-scroll" style="transition-delay: 200ms;">
+                <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Capacitación Corporativa</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Entrenamiento a equipos de Recursos Humanos en
+                    hostigamiento sexual, teletrabajo y nuevas normativas laborales vigentes.</p>
+            </div>
+            <div class="p-10 glass-card rounded-3xl reveal-on-scroll" style="transition-delay: 400ms;">
+                <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Litigios de Alto Impacto</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Defensa judicial y arbitral en procesos de
+                    indemnización por daños, despidos arbitrarios y negociaciones colectivas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section id="contacto" class="py-24 max-w-4xl mx-auto px-6">
+        <div class="text-center mb-16 reveal-on-scroll">
+            <h2 class="text-4xl font-bold mb-4">Contáctenos</h2>
+            <p class="text-gray-500">Inicie su blindaje legal hoy mismo. Un especialista le responderá en menos de 12
+                horas.</p>
+        </div>
+        <div class="glass-card rounded-[40px] p-10 reveal-on-scroll">
+            <form class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Nombre
+                            Completo</label>
+                        <input type="text" placeholder="Ej. Juan Pérez"
+                            class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[#760109] transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Empresa /
+                            RUC</label>
+                        <input type="text" placeholder="Nombre de su organización"
+                            class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[#760109] transition">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Correo
+                        Corporativo</label>
+                    <input type="email" placeholder="email@empresa.pe"
+                        class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[#760109] transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Mensaje o
+                        Consulta</label>
+                    <textarea rows="4" placeholder="¿En qué podemos ayudarle?"
+                        class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[#760109] transition"></textarea>
+                </div>
+                <button type="submit"
+                    class="w-full py-5 gradient-wine text-white rounded-2xl font-bold text-lg hover:opacity-90 transition">Enviar
+                    Solicitud</button>
+            </form>
+            <div
+                class="mt-8 pt-8 border-t border-white/5 flex flex-wrap justify-center gap-8 text-xs text-gray-500 font-bold uppercase tracking-tighter">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 004.587 4.587l.773-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                    </svg>
+                    +51 1 4445588
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                    c.arriola@laboralista.pe
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-white/5 bg-black/40 text-center">
+        <p class="text-xs text-gray-600 font-medium">© 2024 Laboralista Perú & Labor-Guardian. Todos los derechos
+            reservados.</p>
+        <div class="mt-4 flex justify-center gap-6 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
+            <a href="#" class="hover:text-white transition">Privacidad</a>
+            <a href="#" class="hover:text-white transition">Términos</a>
+            <a href="#" class="hover:text-white transition">Cookies</a>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

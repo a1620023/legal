@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros | Laboralista Perú - Identidad y Valores</title>
+    <meta name="description"
+        content="Conozca la historia, misión y visión de Laboralista Perú. Líderes en derecho laboral con enfoque preventivo y estratégico.">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Space Grotesk', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-wine {
+            background: linear-gradient(135deg, #760109 0%, #b91c1c 100%);
+        }
+
+        .text-gradient-wine {
+            background: linear-gradient(135deg, #760109 0%, #b91c1c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="h-full bg-[#020d14] text-white overflow-x-hidden">
+    <!-- NAVIGATION (Same as index) -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/5 backdrop-blur-md bg-black/20">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 gradient-wine rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <span class="font-bold text-lg tracking-tight">Laboralista Perú</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+                <a href="index.html" class="hover:text-white transition">Inicio</a>
+                <a href="nosotros.html" class="text-white transition">Nosotros</a>
+                <a href="servicios.html" class="hover:text-white transition">Servicios</a>
+                <a href="accidentes.html" class="hover:text-white transition">Accidentes</a>
+            </div>
+            <a href="../legal-enterprise.html"
+                class="px-5 py-2 border border-[#760109] text-[#760109] text-xs font-bold rounded-full hover:bg-[#760109]/10 transition">App
+                Login</a>
+        </div>
+    </nav>
+
+    <!-- HEADER SECTION -->
+    <section class="pt-40 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center reveal-on-scroll">
+            <h1 class="text-5xl font-bold mb-6">Nuestra <span class="text-gradient-wine">Misión</span></h1>
+            <p class="text-gray-400 text-xl leading-relaxed">
+                Somos una firma especializada en derecho laboral, enfocada en brindar soluciones legales prácticas,
+                claras y alineadas a la realidad operativa de cada organización.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTENT SECTION -->
+    <section class="py-20 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="reveal-on-scroll">
+                <img src="assets/legal_shield_building_1772115194887.png" alt="Identity"
+                    class="rounded-3xl border border-white/10 shadow-2xl">
+            </div>
+            <div class="space-y-12">
+                <div class="reveal-on-scroll">
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-[#760109] rounded-full"></span>
+                        Nuestro Enfoque
+                    </h2>
+                    <ul class="space-y-6 text-gray-400">
+                        <li class="flex gap-4">
+                            <span class="font-bold text-white">01.</span>
+                            <p><strong class="text-white block mb-1">Cultura Preventiva</strong> Implementamos sistemas
+                                de auditoría continua para identificar contingencias antes de que se conviertan en
+                                costos.</p>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="font-bold text-white">02.</span>
+                            <p><strong class="text-white block mb-1">Cumplimiento Normativo</strong> Alineamos cada
+                                contrato y reglamento con las últimas actualizaciones de la Ley General de Trabajo y
+                                SUNAFIL.</p>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="font-bold text-white">03.</span>
+                            <p><strong class="text-white block mb-1">Estrategia Legal Ops</strong> Combinamos el derecho
+                                con la tecnología para optimizar los procesos de Recursos Humanos.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="reveal-on-scroll">
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-[#760109] rounded-full"></span>
+                        ¿A quiénes acompañamos?
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 glass-card rounded-2xl">
+                            <p class="font-bold text-sm mb-1 text-white">Gerencias de RRHH</p>
+                            <p class="text-xs text-gray-500">Buscando orden y criterio legal.</p>
+                        </div>
+                        <div class="p-4 glass-card rounded-2xl">
+                            <p class="font-bold text-sm mb-1 text-white">Empresas en Crecimiento</p>
+                            <p class="text-xs text-gray-500">Consolidando sus estructuras.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Same as index) -->
+    <footer class="py-12 border-t border-white/5 bg-black/40 text-center">
+        <p class="text-xs text-gray-600 font-medium">© 2024 Laboralista Perú & Labor-Guardian. </p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

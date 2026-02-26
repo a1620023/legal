@@ -1,0 +1,58 @@
+# Propuesta Estratégica y Análisis de Negocio (B2B)
+
+Este documento detalla la estructura comercial, proyecciones de retorno de inversión (ROI) y la estrategia de crecimiento para posicionar a **Labor-Guardian & Sentinel** como una plataforma indispensable para empresas y estudios de abogados.
+
+---
+
+## 1. El Valor para Estudios de Abogados (Law Firms)
+Un estudio de abogados no debe ver esto como una herramienta, sino como una **infraestructura de escalabilidad**.
+
+*   **Apalancamiento (Leverage):** Permite a un solo asociado junior supervisar 10 veces más casos o auditorías sin aumentar el margen de error.
+*   **Modelo de Ingresos Recurrentes (SaaS Reselling):** El estudio puede vender el acceso a "Sentinel" a sus clientes corporativos como un servicio de "Vigilancia Legal 24/7", transformando su facturación por horas en ingresos recurrentes.
+*   **Diferenciador Tecnológico:** En un mercado tradicional, el estudio que usa IA se posiciona como líder en eficiencia y modernidad, atrayendo clientes que buscan velocidad y precisión.
+
+---
+
+## 2. Proyecciones y Retorno de Inversión (ROI)
+
+### Ahorro Estimado (Operational Efficiency)
+| Proceso | Tiempo Manual | Tiempo con IA | Ahorro |
+| :--- | :--- | :--- | :--- |
+| Redacción de Escrito/Contrato | 3 - 5 horas | 2 minutos | **98%** |
+| Auditoría de Planilla (100 emp) | 8 - 12 horas | 30 segundos | **99%** |
+| Consultoría Legal Básica | 1 hora | Instantáneo | **100%** |
+
+### Mitigación de Riesgos (Fine Protection)
+*   **Costo Sentinel Anual:** S/7,990 (Plan Sentinel Anual).
+*   **Multa SUNAFIL Promedio (Infracción Grave):** S/15,000 a S/120,000 (dependiendo del nro de trabajadores).
+*   **Ratio de Cobertura:** El sistema se paga solo con evitar **una sola multa** de nivel bajo en 10 años.
+
+---
+
+## 3. Estrategia de Crecimiento y Equipo Requerido
+
+### Fase 1: Desarrollo de Core (3 - 6 meses)
+*   **Objetivo:** MVP robusto con integración de Red Legal Peruana (Jurisprudencia).
+*   **Equipo:**
+    *   1 Product Manager (Visión de negocio).
+    *   2 Fullstack Developers (Next.js / Python).
+    *   1 AI/ML Engineer (RAG - Retrieval Augmented Generation).
+    *   1 Consultor Legal Senior (Validador de outputs).
+
+### Fase 2: Escalamiento (6 - 12 meses)
+*   **Objetivo:** Integración con ERPs (SAP, Oracle, Plame) y expansión B2B masiva.
+*   **Equipo Adicional:**
+    *   1 DevOps Engineer (Seguridad de datos y escalabilidad).
+    *   1 Sales Lead (Cierre de contratos corporativos).
+    *   Customer Success (Retención de clientes).
+
+---
+
+## 4. Mejoras a la Propuesta de Valor en la Web
+
+Para que la sección de planes sea inequívocamente para empresas, debemos cambiar el lenguaje de "Product-Centric" a "Result-Centric":
+
+1.  **Tagline de Precios:** No es "Elige un plan", es "**Inversión en Blindaje Corporativo**".
+2.  **Etiquetas:** Usar "B2C" (Trabajador) vs "B2B" (Corporativo/Estudio).
+3.  **Social Proof:** Mostrar logotipos de empresas o estudios de abogados que "ya están blindados".
+4.  **Cta Diferencial:** El plan Enterprise no debería ser "Comprar", sino "**Agendar Auditoría de Implementación con Ingeniería**".
